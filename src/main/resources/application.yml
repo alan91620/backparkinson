@@ -7,7 +7,7 @@ app:
   targetUrl: "http://127.0.0.1:5000/predict"
 
 jdbc:
-  driverclassname: "com.mysql.jdbc.Driver"
+  driverclassname: "com.mysql.cj.jdbc.Driver"
   Url: "jdbc:mysql://localhost:3306/parkinson"
   Username: "admin"
   Password: "password"
