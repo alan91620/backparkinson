@@ -30,9 +30,9 @@ public class Mapper {
     public String decrypt(@RequestParam("file") MultipartFile file){
         save(file);
         JSONObject data = Caller.postAudio(pathBuilder());
-        
 
-        return "true";
+        //POST in DB
+        return (String) data.get("parkinson");
     }
 
     public void save(MultipartFile file) {
