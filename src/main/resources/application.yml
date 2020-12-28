@@ -1,7 +1,13 @@
 server:
-  address: 127.0.0.1
+  address:
   port : 8080
 
 app:
   pathToSaveWav : "D:"
   targetUrl: "http://127.0.0.1:5000/predict"
+
+jdbc:
+  driverclassname: "com.mysql.jdbc.Driver"
+  Url: "jdbc:mysql://localhost:3306/parkinson"
+  Username: "root"
+  Password: ""
