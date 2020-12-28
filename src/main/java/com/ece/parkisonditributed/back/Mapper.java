@@ -38,7 +38,7 @@ public class Mapper {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(ds);
 
         jdbcTemplate.update(
-                "INSERT INTO measures (parkinson, Jitter_rel, Jitter_abs, Jitter_RAP, Jitter_PPQ, Shim_loc, Shim_dB, Shim_APQ3, Shim_APQ5, Shi_APQ11, hnr05, hnr15, hnr25) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                "INSERT INTO measures (parkinson, Jitter_rel, Jitter_abs, Jitter_RAP, Jitter_PPQ, Shim_loc, Shim_dB, Shim_APQ3, Shim_APQ5, Shim_APQ11, hnr05, hnr15, hnr25) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 data.get("parkinson"), (BigDecimal) data.get("Jitter_rel"), (BigDecimal) data.get("Jitter_abs"), (BigDecimal) data.get("Jitter_RAP"), (BigDecimal) data.get("Jitter_PPQ"), (BigDecimal) data.get("Shim_loc"), (BigDecimal) data.get("Shim_dB"), (BigDecimal) data.get("Shim_APQ3"), (BigDecimal) data.get("Shim_APQ5"), (BigDecimal) data.get("Shi_APQ11"), (BigDecimal) data.get("hnr05"), (BigDecimal)data.get("hnr15"), (BigDecimal)data.get("hnr25")
         );
 
