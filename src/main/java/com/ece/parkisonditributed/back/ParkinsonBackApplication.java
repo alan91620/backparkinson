@@ -4,14 +4,19 @@ import feign.Feign;
 import feign.gson.GsonEncoder;
 import feign.okhttp.OkHttpClient;
 import feign.slf4j.Slf4jLogger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @SpringBootApplication
 @Component
 public class ParkinsonBackApplication {
+
+	@Autowired
+	private Environment env;
 
 	private static String targetUrl;
 	@Value("${app.targetUrl}")

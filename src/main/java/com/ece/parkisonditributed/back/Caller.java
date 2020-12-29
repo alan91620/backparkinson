@@ -2,7 +2,9 @@ package com.ece.parkisonditributed.back;
 
 import okhttp3.Call;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 
@@ -16,11 +18,11 @@ import java.net.http.HttpResponse;
 @Component
 public class Caller {
 
-    private static String targetUrl;
+    /*private static String targetUrl;
     @Value("${app.targetUrl}")
-    public void settargetUrl(String targetUrl) { Caller.targetUrl = targetUrl; }
+    public void settargetUrl(String targetUrl) { Caller.targetUrl = targetUrl; }*/
 
-    public static JSONObject postAudio(String path){
+    public static JSONObject postAudio(String path, String target){
 
         HttpResponse<String> response;
 
@@ -32,7 +34,8 @@ public class Caller {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest
                 .newBuilder()
-                .uri(URI.create(targetUrl))
+                //.uri(URI.create(targetUrl))
+                .uri(URI.create(target))
                 .setHeader("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(json.toString()))
                 .build();

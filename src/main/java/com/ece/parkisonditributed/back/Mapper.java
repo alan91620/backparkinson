@@ -2,6 +2,7 @@ package com.ece.parkisonditributed.back;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,18 +24,21 @@ import java.nio.file.StandardCopyOption;
 public class Mapper {
 
 
-    @Value("${app.pathToSaveWav}")
-    private String pathToSaveWav;
+    /*@Value("${app.pathToSaveWav}")
+    private String pathToSaveWav;*/
+
+    @Autowired
+    private Environment env;
 
     @PostMapping("/process")
     public ResponseEntity<ResponseMessage> decrypt(@RequestParam("file") MultipartFile file){
         save(file);
-        JSONObject data = Caller.postAudio(pathBuilder());
+        JSONObject data = Caller.postAudio(pathBuilder(), env.getProperty("PAR_API_URL"));
 
         //POST in DB
 
         SpringJdbcConfig configurator = new SpringJdbcConfig();
-        DataSource ds = configurator.mysqlDataSource();
+        DataSource ds = configurator.mysqlDataSource(env.getProperty("MYSQL_DRIVER"),env.getProperty("MYSQL_URL"),env.getProperty("MYSQL_USR"),env.getProperty("MYSQL_PASS"));
         JdbcTemplate jdbcTemplate = new JdbcTemplate(ds);
 
         jdbcTemplate.update(
@@ -63,7 +67,8 @@ public class Mapper {
 
 
     public String pathBuilder (){
-        return pathToSaveWav + "/" + "data.wav";
+        //return pathToSaveWav + "/" + "data.wav";
+        return env.getProperty("WAV_TARGET") + "/" + "data.wav";
 
     }
 }
